@@ -13,7 +13,7 @@ import {
   Tooltip,
 } from '@material-ui/core';
 import classNames from 'classnames';
-import { IParticipant } from './types';
+import { IParticipant } from '../types';
 
 const useStyles = makeStyles(({ palette }) => ({
   errorRow: {

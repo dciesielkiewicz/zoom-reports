@@ -5,7 +5,7 @@ import {
   Typography
 } from '@material-ui/core';
 import { ReportPathInstructions } from 'components';
-import { IParticipant } from './types';
+import { IParticipant } from '../types';
 
 const participantsInstructions = ['Account Management', 'Reports', 'Active Hosts', 'Participants Count', 'Export'];
 const pollInstructions = ['Account Management', 'Reports', 'Meeting', 'Poll Report', 'Generate', 'Download'];
