@@ -109,9 +109,25 @@ export const useParticipants = () => {
     }
   }
 
+  const deleteParticipant = (participantName: IParticipant['name']) => {
+    setParticipants(participants.filter(({ name }) => name !== participantName));
+  }
+
+  const updateParticipant = async (participant: IParticipant) => {
+    const cloneParticipants = [...participants];
+    const index = participants.findIndex(({ name }) => name === participant.name);
+    cloneParticipants[index] = {
+      ...participant,
+      hasError: !participant.attendeesCount,
+    };
+    setParticipants(cloneParticipants);
+  }
+
   return {
+    deleteParticipant,
     participants,
     parseParticipants,
     parsePoll,
+    updateParticipant,
   };
 };

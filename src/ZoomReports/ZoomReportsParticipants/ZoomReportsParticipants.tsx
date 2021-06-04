@@ -1,6 +1,7 @@
-import { useMemo } from 'react';
+import { ChangeEvent, useMemo } from 'react';
 import {
   Box,
+  IconButton,
   makeStyles,
   Paper,
   Table,
@@ -10,12 +11,15 @@ import {
   TableFooter,
   TableHead,
   TableRow,
+  TextField,
   Tooltip,
 } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 import classNames from 'classnames';
 import { IParticipant } from '../types';
+import { MAX_COUNT } from '../utils';
 
-const useStyles = makeStyles(({ palette }) => ({
+const useStyles = makeStyles(({ palette, spacing }) => ({
   errorRow: {
     backgroundColor: palette.error.light,
   },
@@ -24,15 +28,29 @@ const useStyles = makeStyles(({ palette }) => ({
   },
   warningIcon: {
     display: 'block',
+  },
+  attendeesCountColumn: {
+    display: 'block',
+    fontSize: '0.875rem',
+    textAlign: 'center',
+    width: 125,
+    margin: 'auto'
+  },
+  deleteButton: {
+    padding: spacing(1),
   }
 }));
 
 interface IZoomReportsParticipantsProps {
+  handleDeleteParticipantClicked: (participant: IParticipant) => () => void;
   participants: IParticipant[];
+  updateParticipant: (participant: IParticipant) => void;
 }
 
 export const ZoomReportsParticipants = ({
+  handleDeleteParticipantClicked,
   participants,
+  updateParticipant,
 }: IZoomReportsParticipantsProps) => {
   const classes = useStyles();
 
@@ -51,45 +69,77 @@ export const ZoomReportsParticipants = ({
                 <TableCell component="th">
                   Participant name
                 </TableCell>
-                <TableCell component="th">
-                  Attendees count
+                <TableCell component="th" align="center">
+                  <span className={classes.attendeesCountColumn}>
+                    Attendees count
+                  </span>
                 </TableCell>
+                <TableCell />
               </TableRow>
             </TableHead>
             <TableBody>
-              {participants.map((participant) => (
-                <TableRow
-                  key={participant.name}
-                  className={classNames({
-                    [classes.errorRow]: participant.hasError,
-                    [classes.hasCountRow]: participant.hasCountInName,
-                  })}
-                >
-                  <TableCell>
-                    {participant.hasCountInName ? (
-                      <Tooltip
-                        aria-label="Count in name tooltip"
-                        title="Participant has count in name"
-                      >
-                        <Box>
-                          {participant.name}
-                        </Box>
-                      </Tooltip>
-                    ) : participant.name}
-                  </TableCell>
-                  <TableCell>
-                    {participant.attendeesCount}
-                  </TableCell>
-                </TableRow>
-              ))}
+              {participants.map((participant) => {
+                const handleParticipantAttendeesCountChange = (event: ChangeEvent<HTMLInputElement>) => {
+                  updateParticipant({
+                    ...participant,
+                    attendeesCount: parseInt(event.target.value) || undefined,
+                  })
+                }
+                return (
+                  <TableRow
+                    key={participant.name}
+                    className={classNames({
+                      [classes.errorRow]: participant.hasError,
+                      [classes.hasCountRow]: participant.hasCountInName,
+                    })}
+                  >
+                    <TableCell>
+                      {participant.hasCountInName ? (
+                        <Tooltip
+                          aria-label="Count in name tooltip"
+                          title="Participant has count in name"
+                        >
+                          <Box>
+                            {participant.name}
+                          </Box>
+                        </Tooltip>
+                      ) : participant.name}
+                    </TableCell>
+                    <TableCell align="center">
+                      <TextField
+                        inputProps={{
+                          className: classes.attendeesCountColumn,
+                          min: 0,
+                          max: MAX_COUNT,
+                        }}
+                        placeholder="Attendees count"
+                        onChange={handleParticipantAttendeesCountChange}
+                        type="number"
+                        value={participant.attendeesCount}
+                      />
+                    </TableCell>
+                    <TableCell>
+                    <IconButton
+                      aria-label="delete"
+                      className={classes.deleteButton}
+                      onClick={handleDeleteParticipantClicked(participant)}
+                    >
+                      <DeleteIcon fontSize="small" />
+                    </IconButton>
+                    </TableCell>
+                  </TableRow>
+                )
+            })}
             </TableBody>
             <TableFooter>
               <TableRow>
                 <TableCell>
                   Overall attendees count
                 </TableCell>
-                <TableCell>
-                  {overallParticipantsCount}
+                <TableCell align="center">
+                  <span className={classes.attendeesCountColumn}>
+                    {overallParticipantsCount}
+                  </span>
                 </TableCell>
               </TableRow>
             </TableFooter>

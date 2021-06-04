@@ -16,6 +16,9 @@ export const theme = createMuiTheme({
       head: {
         fontWeight: 700,
       },
+      sizeSmall: {
+        padding: '6px 16px'
+      }
     },
   }
 });

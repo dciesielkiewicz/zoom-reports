@@ -1,4 +1,8 @@
+import { useState } from 'react';
 import { Box, Typography } from '@material-ui/core';
+import { useModal } from 'hooks';
+import { DeleteParticipantModal } from './DeleteParticipantModal';
+import { IParticipant } from './types';
 import { useParticipants } from './useParticipants';
 import { ZoomReportsForm } from './ZoomReportsForm';
 import { ZoomReportsParticipants } from './ZoomReportsParticipants';
@@ -6,11 +10,20 @@ import { ZoomReportsParticipants } from './ZoomReportsParticipants';
 
 
 export const ZoomReports = () => {
+  const { closeModal, isOpened, openModal } = useModal();
   const {
+    deleteParticipant,
     participants,
     parseParticipants,
     parsePoll,
+    updateParticipant,
   } = useParticipants();
+  const [deleteModalParticipant, setDeleteModalParticipant] = useState<IParticipant | undefined>();
+
+  const handleDeleteParticipantClicked = (participant: IParticipant) => () => {
+    setDeleteModalParticipant(participant);
+    openModal();
+  }
 
   return (
     <>
@@ -26,7 +39,19 @@ export const ZoomReports = () => {
           participants={participants}
         />
       </Box>
-      <ZoomReportsParticipants participants={participants} />
+      <ZoomReportsParticipants
+        handleDeleteParticipantClicked={handleDeleteParticipantClicked}
+        participants={participants}
+        updateParticipant={updateParticipant}
+      />
+      {deleteModalParticipant && (
+        <DeleteParticipantModal
+          closeModal={closeModal}
+          deleteParticipant={deleteParticipant}
+          isOpened={isOpened}
+          participant={deleteModalParticipant}
+        />
+      )}
     </>
   );
 };
