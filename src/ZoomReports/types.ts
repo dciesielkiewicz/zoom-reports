@@ -21,7 +21,6 @@ export enum EPollHeader {
   Name = 'User Name',
   Email = 'User Email',
   SubmittedTime = 'Submitted Date/Time',
-  Question = 'Question',
   Answer = 'Answer',
 }
 
@@ -30,7 +29,6 @@ export interface IPollCsvRow {
   [EPollHeader.Name]: string;
   [EPollHeader.Email]: string;
   [EPollHeader.SubmittedTime]: string;
-  [EPollHeader.Question]: string;
   [EPollHeader.Answer]: string;
 }
 

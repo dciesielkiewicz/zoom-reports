@@ -59,7 +59,9 @@ export const useParticipants = () => {
         invalidHeaderRow,
         ...dataRows
       ] = pollCsvText.split('\n').filter(Boolean);
-      const headerRow = invalidHeaderRow.replace('Submitted Date/Time', 'Submitted Date/Time,Question,Answer')
+      console.log({ invalidHeaderRow });
+      const headerRow = invalidHeaderRow.replace(/Submitted\sDate\/Time,(.*)/, 'Submitted Date/Time,Answer')
+      console.log({ headerRow })
       const {
         data,
         meta: { fields },
@@ -68,7 +70,7 @@ export const useParticipants = () => {
       });
 
       const nameColumnHeader = fields?.[1];
-      const answerHeader = fields?.[5];
+      const answerHeader = fields?.[4];
       if (
         nameColumnHeader !== EPollHeader.Name ||
         answerHeader !== EPollHeader.Answer
