@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Typography } from '@material-ui/core';
+import { Box, Typography } from '@mui/material';
 import { useModal } from 'hooks';
 import { DeleteParticipantModal } from './DeleteParticipantModal';
 import { IParticipant } from './types';

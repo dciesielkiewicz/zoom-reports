@@ -3,7 +3,7 @@ import {
   Box,
   Button,
   Typography
-} from '@material-ui/core';
+} from '@mui/material';
 import { ReportPathInstructions } from 'components';
 import { IParticipant } from '../types';
 

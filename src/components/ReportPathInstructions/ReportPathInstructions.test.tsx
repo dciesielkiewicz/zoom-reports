@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render } from 'testUtils';
 import { ReportPathInstructions } from './ReportPathInstructions';
 
 const instruction1 = 'Instruction 1';

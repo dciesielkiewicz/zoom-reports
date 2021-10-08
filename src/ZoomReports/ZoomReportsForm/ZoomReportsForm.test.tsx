@@ -1,4 +1,5 @@
-import { act, fireEvent, render, waitFor } from '@testing-library/react';
+import { act, fireEvent, waitFor } from '@testing-library/react';
+import { render } from 'testUtils';
 import { ZoomReportsForm } from './ZoomReportsForm';
 import { IParticipant } from '../types';
 
@@ -43,14 +44,14 @@ describe('ZoomReportsForm', () => {
   });
 
   test('Poll upload button should be disabled without participants', async () => {
-    const { getByText } = render(
+    const { getByLabelText } = render(
       <ZoomReportsForm
         parseParticipants={parseParticipants}
         parsePoll={parsePoll}
         participants={[]}
       />
     );
-    expect(getByText('Poll report').parentNode).toHaveClass('Mui-disabled');
+    expect(getByLabelText('Poll report').parentNode).toHaveClass('Mui-disabled');
   });
 
   test('Should properly handle poll file upload', async () => {

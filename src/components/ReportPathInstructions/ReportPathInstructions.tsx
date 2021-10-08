@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
-import { Box, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import { Box, Grid, Paper, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 const useStyles = makeStyles(() => ({
   icon: {
@@ -23,11 +24,11 @@ export const ReportPathInstructions = ({
           {instructions.map((instruction, index) => (
             <Fragment key={instruction}>
               {index !== 0 && (
-                <Grid item>
+                <Grid item sx={{ display: 'flex' }}>
                   <NavigateNextIcon className={classes.icon} fontSize="small" />
                 </Grid>
               )}
-              <Grid item>
+              <Grid item sx={{ display: 'flex' }}>
                 <Typography variant="body2">{instruction}</Typography>
               </Grid>
             </Fragment>

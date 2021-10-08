@@ -2,7 +2,6 @@ import { ChangeEvent, useMemo } from 'react';
 import {
   Box,
   IconButton,
-  makeStyles,
   Paper,
   Table,
   TableBody,
@@ -13,8 +12,9 @@ import {
   TableRow,
   TextField,
   Tooltip,
-} from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
+} from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import DeleteIcon from '@mui/icons-material/Delete';
 import classNames from 'classnames';
 import { IParticipant } from '../types';
 import { MAX_COUNT } from '../utils';
@@ -107,6 +107,7 @@ export const ZoomReportsParticipants = ({
                     </TableCell>
                     <TableCell align="center">
                       <TextField
+                        fullWidth
                         inputProps={{
                           className: classes.attendeesCountColumn,
                           min: 0,
