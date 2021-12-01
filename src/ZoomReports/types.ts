@@ -1,10 +1,10 @@
 export enum EParticipantHeader {
-  Name = 'Name (Original Name)',
-  Email = 'User Email',
-  JoinTime = 'Join Time',
-  LeaveTime = 'Leave Time',
-  DurationMinutes = 'Duration (Minutes)',
-  Guest = 'Guest',
+  Name = 'Nazwa (nazwa oryginalna)',
+  Email = 'Adres e-mail użytkownika',
+  JoinTime = 'Czas dołączenia',
+  LeaveTime = 'Czas opuszczenia',
+  DurationMinutes = 'Czas trwania (minuty)',
+  Guest = 'Gość',
 }
 
 export interface IParticipantsCsvRow {
