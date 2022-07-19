@@ -52,8 +52,10 @@ export const useParticipants = () => {
         /* eslint-disable @typescript-eslint/no-unused-vars */
         pollReportRow,
         generatedRow,
-        meetingHeaderRow,
-        meetingDetailsRow,
+        topicRow,
+        meetingIdRow,
+        startTimeRow,
+        durationRow,
         pollDetailsRow,
         /* eslint-enable @typescript-eslint/no-unused-vars */
         invalidHeaderRow,
